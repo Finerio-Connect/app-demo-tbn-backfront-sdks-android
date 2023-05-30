@@ -1,11 +1,51 @@
 package com.finerioconnect.pfm.sdk.tecban.demobackfront
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.finerioconnect.core.sdk.core.FinerioConnectCore
+import com.finerioconnect.core.sdk.shared.enums.Environment
+import com.finerioconnect.core.sdk.shared.enums.LogLevel
+import com.finerioconnect.pfm.sdk.core.FinerioPFMAPI
+import com.finerioconnect.pfm.sdk.tecban.demobackfront.credits.CreditsActivity
+import com.finerioconnect.pfm.sdk.tecban.demobackfront.databinding.ActivityMainBinding
+import com.finerioconnect.sdk.credit.core.FinerioCreditSDK
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var mBinding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        mBinding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
+
+        setup()
+    }
+
+    private fun setup() {
+        configSDKs()
+        setListeners()
+    }
+
+    private fun configSDKs() {
+        val finerioConnectCore = FinerioConnectCore.shared
+        finerioConnectCore.apiKey = ""
+        finerioConnectCore.environment = Environment.SANDBOX
+        finerioConnectCore.logLevel = LogLevel.DEBUG
+        finerioConnectCore.configure()
+
+        FinerioPFMAPI.shared.init()
+
+        val finerioCreditSDK = FinerioCreditSDK.shared
+        finerioCreditSDK.configure()
+    }
+
+    private fun setListeners() = with(mBinding) {
+        btGoCreditsSDK.setOnClickListener { goNextClass(CreditsActivity::class.java) }
+    }
+
+    private fun goNextClass(_class: Class<*>) {
+        val intent = Intent(this, _class)
+        startActivity(intent)
     }
 }
