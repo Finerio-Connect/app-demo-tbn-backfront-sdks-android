@@ -10,6 +10,7 @@ import com.finerioconnect.pfm.sdk.core.FinerioPFMAPI
 import com.finerioconnect.pfm.sdk.modules.accounts.listeners.GetFinancialEntitiesListener
 import com.finerioconnect.pfm.sdk.modules.credits.listeners.GetCreditsListener
 import com.finerioconnect.pfm.sdk.tecban.demobackfront.databinding.ActivityCreditsBinding
+import com.finerioconnect.pfm.sdk.tecban.demobackfront.shared.Constants
 
 class CreditsActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityCreditsBinding
@@ -55,7 +56,7 @@ class CreditsActivity : AppCompatActivity() {
     }
 
     private fun getCredits() {
-        val userId = 43363898
+        val userId = Constants.Commons.USER_ID
         val cursor = null
 
         FinerioPFMAPI.shared.creditsClient().getList(
