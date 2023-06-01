@@ -7,8 +7,10 @@ import com.finerioconnect.core.sdk.core.FinerioConnectCore
 import com.finerioconnect.core.sdk.shared.enums.Environment
 import com.finerioconnect.core.sdk.shared.enums.LogLevel
 import com.finerioconnect.pfm.sdk.core.FinerioPFMAPI
+import com.finerioconnect.pfm.sdk.tecban.demobackfront.budgets.BudgetsActivity
 import com.finerioconnect.pfm.sdk.tecban.demobackfront.credits.CreditsActivity
 import com.finerioconnect.pfm.sdk.tecban.demobackfront.databinding.ActivityMainBinding
+import com.finerioconnect.sdk.budget.core.FinerioBudgetSDK
 import com.finerioconnect.sdk.credit.core.FinerioCreditSDK
 
 class MainActivity : AppCompatActivity() {
@@ -29,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun configSDKs() {
         val finerioConnectCore = FinerioConnectCore.shared
-        finerioConnectCore.apiKey = ""
+        finerioConnectCore.apiKey = "api_key"
         finerioConnectCore.environment = Environment.SANDBOX
         finerioConnectCore.logLevel = LogLevel.DEBUG
         finerioConnectCore.configure()
@@ -38,10 +40,14 @@ class MainActivity : AppCompatActivity() {
 
         val finerioCreditSDK = FinerioCreditSDK.shared
         finerioCreditSDK.configure()
+
+        val finerioBudgetSDK = FinerioBudgetSDK.shared
+        finerioBudgetSDK.configure()
     }
 
     private fun setListeners() = with(mBinding) {
         btGoCreditsSDK.setOnClickListener { goNextClass(CreditsActivity::class.java) }
+        btGoBudgetsSDK.setOnClickListener { goNextClass(BudgetsActivity::class.java) }
     }
 
     private fun goNextClass(_class: Class<*>) {
