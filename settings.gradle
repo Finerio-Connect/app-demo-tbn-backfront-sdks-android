@@ -5,4 +5,6 @@ include ':FinerioConnectPFMSDK'
 project(':FinerioConnectPFMSDK').projectDir=new File('/Users/erickdominguez/Documents/Projects/job/finerio-sdk-backend-tecban-android/FinerioConnectPFMSDK')
 include ':FinerioCreditSDK'
 project(':FinerioCreditSDK').projectDir=new File('/Users/erickdominguez/Documents/Projects/job/tecban/finerio-sdks-pfm-ui-tecban-android/FinerioCreditSDK')
+include ':FinerioBudgetSDK'
+project(':FinerioBudgetSDK').projectDir=new File('/Users/erickdominguez/Documents/Projects/job/tecban/finerio-sdks-pfm-ui-tecban-android/FinerioBudgetSDK')
 

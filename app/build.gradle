@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.finerioconnect.pfm.sdk.tecban.demobackfront"
-        minSdk 16
+        minSdk 24
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -43,6 +43,7 @@ dependencies {
     implementation project(':FinerioConnectCore')
     implementation project(':FinerioConnectPFMSDK')
     implementation project(':FinerioCreditSDK')
+    implementation project(':FinerioBudgetSDK')
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
