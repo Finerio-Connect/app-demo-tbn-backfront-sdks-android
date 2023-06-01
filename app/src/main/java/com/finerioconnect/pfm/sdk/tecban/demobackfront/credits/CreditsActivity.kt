@@ -3,6 +3,7 @@ package com.finerioconnect.pfm.sdk.tecban.demobackfront.credits
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import com.finerioconnect.core.sdk.models.FCError
 import com.finerioconnect.core.sdk.models.FCFinancialEntity
 import com.finerioconnect.core.sdk.models.responses.FCCreditsResponse
@@ -31,6 +32,7 @@ class CreditsActivity : AppCompatActivity() {
     }
 
     private fun getFinancialEntities() {
+        mBinding.progressBar.visibility = View.VISIBLE
         val isBankAgreggation = true
 
         FinerioPFMAPI.shared.accounts().FinancialEntity().getAll(
@@ -43,12 +45,14 @@ class CreditsActivity : AppCompatActivity() {
 
                 override fun error(errors: List<FCError>) {
                     if (errors.isNotEmpty()) {
+                        mBinding.progressBar.visibility = View.GONE
                         val (_, _, detail) = errors[0]
                         Log.e("ERROR", detail)
                     }
                 }
 
                 override fun severError(serverError: Throwable) {
+                    mBinding.progressBar.visibility = View.GONE
                     Log.e("SERVER ERROR", serverError.message!!)
                 }
             }
@@ -64,18 +68,21 @@ class CreditsActivity : AppCompatActivity() {
             cursor,
             object : GetCreditsListener {
                 override fun creditsObtained(response: FCCreditsResponse) {
+                    mBinding.progressBar.visibility = View.GONE
                     mCreditsResponse = response
                     setDataToUI()
                 }
 
                 override fun error(errors: List<FCError>) {
                     if (errors.isNotEmpty()) {
+                        mBinding.progressBar.visibility = View.GONE
                         val (_, _, detail) = errors[0]
                         Log.e("ERROR", detail)
                     }
                 }
 
                 override fun severError(serverError: Throwable) {
+                    mBinding.progressBar.visibility = View.GONE
                     Log.e("SERVER ERROR", serverError.message!!)
                 }
             }
